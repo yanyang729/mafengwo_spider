@@ -10,8 +10,38 @@ from scrapy import Selector
 class Data_Crawl(scrapy.Spider):
     name = 'mafengwo'  # -爬虫名：一爬虫对应一名字
     allowed_domains = ['www.mafengwo.cn', 'pagelet.mafengwo.cn']  # 爬取网址域名
-    start_urls = ['dfs']  # -输入爬取的目的地或者关键字
-
+    start_urls = ["乐天免税店",
+                "Lotte Duty Free",
+                "lotteduty", 
+                "新罗免税店",
+                "Shilla Duty Free",
+                "shilladuty", 
+                "丝芙兰",
+                "sephora",
+                "facesses", 
+                "China Duty Free",
+                "中国免税品",
+                "中免",
+                "三亚免税店",
+                "ChinaDutyFree", 
+                "香港的莎莎",
+                "香港莎莎",
+                "香港 莎莎",
+                "香港 sasa",
+                "Sasa店",
+                "香港的sasa",
+                "香港sasa",
+                "莎莎中国",
+                "莎莎网",
+                "莎莎香港",
+                "sasa香港",
+                "品牌莎莎",
+                "莎莎会员",
+                "sasa会员",
+                "莎莎 SaSa",
+                "莎莎 会员",
+                "sasa 会员",  
+                "DFS"]  # -输入爬取的目的地或者关键字
     host = "http://www.mafengwo.cn/search/s.php?q="
 
     def start_requests(self):
