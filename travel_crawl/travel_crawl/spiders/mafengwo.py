@@ -1,47 +1,16 @@
 # -*- encoding:utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, absolute_import
 import scrapy, requests, json, math, time, os, urllib
 from bs4 import BeautifulSoup
 from travel_crawl.items import GonglveItem, QAItem
 import socket
 from scrapy import Selector
-
+from .constants import KEYWORDS
 
 class Data_Crawl(scrapy.Spider):
     name = 'mafengwo'  # -爬虫名：一爬虫对应一名字
     allowed_domains = ['www.mafengwo.cn', 'pagelet.mafengwo.cn']  # 爬取网址域名
-    start_urls = ["乐天免税店",
-                "Lotte Duty Free",
-                "lotteduty", 
-                "新罗免税店",
-                "Shilla Duty Free",
-                "shilladuty", 
-                "丝芙兰",
-                "sephora",
-                "facesses", 
-                "China Duty Free",
-                "中国免税品",
-                "中免",
-                "三亚免税店",
-                "ChinaDutyFree", 
-                "香港的莎莎",
-                "香港莎莎",
-                "香港 莎莎",
-                "香港 sasa",
-                "Sasa店",
-                "香港的sasa",
-                "香港sasa",
-                "莎莎中国",
-                "莎莎网",
-                "莎莎香港",
-                "sasa香港",
-                "品牌莎莎",
-                "莎莎会员",
-                "sasa会员",
-                "莎莎 SaSa",
-                "莎莎 会员",
-                "sasa 会员",  
-                "DFS"]  # -输入爬取的目的地或者关键字
+    start_urls = KEYWORDS  # -输入爬取的目的地或者关键字
     host = "http://www.mafengwo.cn/search/s.php?q="
 
     def start_requests(self):
@@ -72,7 +41,7 @@ class Data_Crawl(scrapy.Spider):
         if page_num < 5:
             url = "http://www.mafengwo.cn/qa/ajax_qa/more?type=0&mddid=&tid=&sort=0&key={}&page={}".format(key,
                                                                                                            page_num + 1)
-            print 'next 20 questions...'
+            print('next 20 questions...')
             yield scrapy.Request(url=url, meta={'page_num': page_num + 1, 'key': key}, callback=self.parse_qa)
 
     def parse_qa_detail(self, res):
